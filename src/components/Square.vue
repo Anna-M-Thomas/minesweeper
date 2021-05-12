@@ -11,27 +11,20 @@
 </template>
 
 <script>
-//squareObj: {row: Number, column: Number, mine: boolean, number: Number, marked: boolean}
 export default {
   name: "Square",
   props: ["squareObj"],
   emits: ["clicked", "marked"],
-  data() {
-    return {
-      show: false,
-    };
-  },
   methods: {
     handleMark() {
-      console.log("called");
       this.$emit("marked", this.squareObj.row, this.squareObj.column);
     },
     handleClick() {
-      this.show = true;
       this.$emit("clicked", this.squareObj.row, this.squareObj.column);
     },
   },
   computed: {
+    //show contents: mine, number if not zero  中身を見せる：地雷、またはゼロじゃなければnumber
     showContents() {
       if (this.squareObj.mine) {
         return "💥";
