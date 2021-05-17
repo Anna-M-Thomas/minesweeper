@@ -72,8 +72,7 @@ export default {
       if (square.mine && !square.marked) {
         this.nowPlaying = false;
         this.squaresWithMines.forEach((mine) => (mine.revealed = true));
-      }
-      if (!square.marked) {
+      } else if (!square.marked) {
         square.revealed = true;
         if (square.number === 0) {
           this.showSquares(row, column);
