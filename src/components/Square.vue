@@ -6,7 +6,7 @@
     @click.right.prevent="handleMark"
   >
     {{ squareObj.revealed ? showContents : "" }}
-    {{ squareObj.marked ? "🚩" : "" }}
+    {{ squareObj.marked && !squareObj.revealed ? "🚩" : "" }}
   </div>
 </template>
 
@@ -43,6 +43,9 @@ export default {
 
 <style scoped>
 .square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 20px;
   height: 20px;
   background-color: lightgray;
@@ -50,14 +53,10 @@ export default {
   border-left: 3px solid rgb(245, 243, 243);
   border-right: 3px solid darkgrey;
   border-bottom: 3px solid darkgrey;
-}
-
-.clickedMine {
-  background-color: red;
+  cursor: default;
 }
 
 .revealed {
-  background-color: lightgray;
   padding: 2px;
   border: 1px solid darkgrey;
 }

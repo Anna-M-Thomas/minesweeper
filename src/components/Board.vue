@@ -1,13 +1,20 @@
 <template>
-  <div class="board">Mines: {{ mines - markedMines }}</div>
-  <div className="row" v-for="rowNumber in boardArray.length" :key="rowNumber">
-    <square
-      v-for="number in boardArray[rowNumber - 1]"
-      :key="number"
-      :squareObj="number"
-      @clicked="handleClick"
-      @marked="handleMark"
-    ></square>
+  <div id="board">
+    {{ wonGame ? "CONGRATS! You won the game!" : "" }}
+    Mines: {{ mines - markedMines }}
+    <div
+      className="row"
+      v-for="rowNumber in boardArray.length"
+      :key="rowNumber"
+    >
+      <square
+        v-for="number in boardArray[rowNumber - 1]"
+        :key="number"
+        :squareObj="number"
+        @clicked="handleClick"
+        @marked="handleMark"
+      ></square>
+    </div>
   </div>
 </template>
 
@@ -16,7 +23,7 @@ import Square from "./Square.vue";
 
 export default {
   name: "Board",
-  props: ["boardArray", "mines", "markedMines"],
+  props: ["boardArray", "mines", "markedMines", "wonGame"],
   components: { Square },
   emits: ["clicked", "marked"],
   methods: {
@@ -33,5 +40,13 @@ export default {
 <style scoped>
 .row {
   display: flex;
+  align-items: stretch;
+}
+
+#board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
 }
 </style>
